@@ -130,7 +130,8 @@ oo::class create CardDAV {
 
     #
     # Fill an addressbook with a list of props.  Optionally, only the VCards
-    # for people in the contact list will be filled.
+    # for people in the contact list will be filled. All props are matched
+    # against people in the contact list.
     method fillAddressBook {abook props {contact {}}} {
         my FillAddressBook $abook $props $contact
     }
@@ -299,12 +300,14 @@ oo::class create CardDAV {
         if {$contacts ne {}} {
             append query {<C:filter test="anyof">}
             foreach c $contacts {
-                append query {
-                    <C:prop-filter name="FN">
-                        <C:text-match collation="i;unicode-casemap"
-                                      match-type="contains"
-                        >} $c {</C:text-match>
-                    </C:prop-filter>
+                foreach p $props {
+                    append query {
+                        <C:prop-filter name="} $p {">
+                            <C:text-match collation="i;unicode-casemap"
+                                          match-type="contains"
+                            >} $c {</C:text-match>
+                        </C:prop-filter>
+                    }
                 }
             }
             append query {</C:filter>}
