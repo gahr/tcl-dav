@@ -30,7 +30,6 @@ Family.EMAIL;PREF=1;TYPE=other,home,\"whokn,owsbla\":me@example.com
 END:VCARD
 }
 
-
 set common::data::v2 {BEGIN:VCARD
 VERSION:3.0
 FN:Pietro Cerutti
