@@ -277,7 +277,7 @@ oo::class create VCard {
                 # defaulting to year 1604. See
                 # https://github.com/nextcloud/3rdparty/blob/ae67e91/sabre/vobject/lib/VCardConverter.php#L107-L119
                 if {![string compare -length 5 $value {1604-}]} {
-                    set value [string replace $value 0 3 0000]
+                    set value [string replace $value 0 3 -]
                 }
             }
         }
