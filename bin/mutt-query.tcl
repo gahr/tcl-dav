@@ -50,9 +50,11 @@ set entries [list]
 foreach abook [cdav getAddressBooks] {
     cdav fillAddressBook $abook {FN NICKNAME EMAIL} [list $search]
     foreach vcard [$abook getVCards] {
-        set name   [$vcard getFirstValue FN]
+        set name [$vcard getFirstValue FN]
+        set nick [$vcard getFirstValue NICKNAME]
         foreach email [$vcard getItems EMAIL] {
-            lappend entries [list [$email getValue] $name [$email getParam TYPE]]
+            set n [format "%s%s" $name [expr {$nick eq {} ? "" : " ($nick)"}]]
+            lappend entries [list [$email getValue] $n [$email getParam TYPE]]
         }
     }
 }
