@@ -16,5 +16,5 @@ git:
 	git fast-import && git reset --hard HEAD && \
 	git remote add origin git@github.com:gahr/tcl-dav.git && \
 	git push -f origin master && \
-	rm -rf git-import
+	cd .. && rm -rf git-import
 
